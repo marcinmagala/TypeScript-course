@@ -46,5 +46,37 @@
 //   console.log(calculatePrice(orginalPrice, hasDiscount));
 // });
 
-// Array type
-console.log("test2");
+// Starting Project
+
+// <li>
+// <label for="task-1">Wyrzuciś śmieci</label>
+// <input type="checkbox" id="task-1" name="Wyrzucić śmieci" />
+// </li>
+
+const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
+const addTaskButton: HTMLButtonElement = document.querySelector("button");
+const taskNameInputElement: HTMLInputElement = document.querySelector("#name");
+
+const tasks: string[] = ["Wyrzucić śmieci", "Pójść na siłkę", "Nakarmić koty"];
+
+const render = () => {
+  tasksContainerElement.innerHTML = "";
+  tasks.forEach((task) => {
+    const taskElement: HTMLElement = document.createElement("li");
+    taskElement.innerText = task;
+    tasksContainerElement.appendChild(taskElement);
+  });
+};
+
+const addTask = (task: string) => {
+  tasks.push(task);
+};
+
+addTaskButton.addEventListener("click", (e: Event) => {
+  e.preventDefault();
+  addTask(taskNameInputElement.value);
+  render();
+  taskNameInputElement.value = "";
+});
+
+render();
