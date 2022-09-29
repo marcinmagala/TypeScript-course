@@ -4,12 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
-    <!-- <input type="number" id="input1" />
-    <input type="number" id="input2" /> -->
-    <button>Buy</button>
+    <form class="container">
+      <label for="name">Task:</label>
+      <input type="text" id="name" />
+      <button>Add</button>
+      <p>ToDo:</p>
+      <ul class="tasks">
+        <li>
+          <label for="task-1">Wyrzuciś śmieci</label>
+          <input type="checkbox" id="task-1" name="Wyrzucić śmieci" />
+        </li>
+      </ul>
+    </form>
     <script src="dist/app.js"></script>
   </body>
 </html>

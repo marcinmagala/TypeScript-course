@@ -47,3 +47,4 @@
 // });
 
 // Array type
+console.log("test2");
