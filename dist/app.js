@@ -31,24 +31,46 @@
 //   console.log(calculatePrice(orginalPrice, hasDiscount));
 // });
 // Starting Project
-// <li>
-// <label for="task-1">Wyrzuciś śmieci</label>
-// <input type="checkbox" id="task-1" name="Wyrzucić śmieci" />
-// </li>
 const tasksContainerElement = document.querySelector(".tasks");
 const addTaskButton = document.querySelector("button");
 const taskNameInputElement = document.querySelector("#name");
-const tasks = ["Wyrzucić śmieci", "Pójść na siłkę", "Nakarmić koty"];
+const tasks = [
+    {
+        name: "Wyrzucić śmieci",
+        done: false,
+    },
+    {
+        name: "Pójść na siłkę",
+        done: true,
+    },
+    {
+        name: "Nakarmić koty",
+        done: false,
+    },
+];
 const render = () => {
     tasksContainerElement.innerHTML = "";
-    tasks.forEach((task) => {
+    tasks.forEach((task, index) => {
         const taskElement = document.createElement("li");
-        taskElement.innerText = task;
+        const labelElement = document.createElement("label");
+        const id = `task-${index}`;
+        labelElement.setAttribute("for", id);
+        labelElement.innerText = task.name;
+        const checkboxElement = document.createElement("input");
+        checkboxElement.type = "checkbox";
+        checkboxElement.name = task.name;
+        checkboxElement.id = id;
+        checkboxElement.checked = task.done;
+        checkboxElement.addEventListener("change", () => {
+            task.done = !task.done;
+        });
+        taskElement.appendChild(labelElement);
+        taskElement.appendChild(checkboxElement);
         tasksContainerElement.appendChild(taskElement);
     });
 };
-const addTask = (task) => {
-    tasks.push(task);
+const addTask = (taskName) => {
+    tasks.push({ name: taskName, done: false });
 };
 addTaskButton.addEventListener("click", (e) => {
     e.preventDefault();
