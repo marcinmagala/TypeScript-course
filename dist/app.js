@@ -14,8 +14,20 @@
 //   console.log(sum);
 // });
 // Union types
-const logAge = (age) => {
-    console.log(`Mam ${age} lata.`);
-};
-logAge(24);
-logAge("dwadziescia cztery");
+// const logAge = (age: number | string) => {
+//   console.log(`Mam ${age} lata.`);
+// };
+// logAge(24);
+// logAge("dwadziescia cztery");
+// Boolean type
+// const buttonElement = document.querySelector("button");
+// const calculatePrice = (orginalPrice: number, hasDiscount: boolean) => {
+//   return hasDiscount ? orginalPrice * 0.8 : orginalPrice;
+// };
+// buttonElement.addEventListener("click", () => {
+//   const orginalPrice: number = 50;
+//   const hasDiscount: boolean =
+//     new URLSearchParams(window.location.search).get("discount") === "true";
+//   console.log(calculatePrice(orginalPrice, hasDiscount));
+// });
+// Array type
