@@ -69,12 +69,12 @@ const render = () => {
         tasksContainerElement.appendChild(taskElement);
     });
 };
-const addTask = (taskName) => {
-    tasks.push({ name: taskName, done: false });
+const addTask = (task) => {
+    tasks.push(task);
 };
 addTaskButton.addEventListener("click", (e) => {
     e.preventDefault();
-    addTask(taskNameInputElement.value);
+    addTask({ name: taskNameInputElement.value, done: false });
     render();
     taskNameInputElement.value = "";
 });
