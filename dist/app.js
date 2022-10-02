@@ -1,5 +1,7 @@
 // let age: number = 24;
 // age = 25;
+import renderTasks from "./helpers/render-tasks.helper.js";
+import { renderCategories } from "./helpers/render-categories.helper.js";
 // let ageAsString: string = "dwadziescia cztery";
 // console.log(`${age}`);
 // const add = (v1: number, v2: number) => v1 + v2;
@@ -35,6 +37,7 @@ const tasksContainerElement = document.querySelector(".tasks");
 const addTaskButton = document.querySelector("button");
 const taskNameInputElement = document.querySelector("#name");
 const categoriesContainerElement = document.querySelector(".categories");
+let selectedCategory;
 const categories = ["general", "work", "gym", "hobby"];
 const tasks = [
     {
@@ -53,69 +56,18 @@ const tasks = [
         category: "work",
     },
 ];
-const render = () => {
-    tasksContainerElement.innerHTML = "";
-    tasks.forEach((task, index) => {
-        const taskElement = document.createElement("li");
-        if (task.category) {
-            taskElement.classList.add(task.category);
-        }
-        const labelElement = document.createElement("label");
-        const id = `task-${index}`;
-        labelElement.setAttribute("for", id);
-        labelElement.innerText = task.name;
-        const checkboxElement = document.createElement("input");
-        checkboxElement.type = "checkbox";
-        checkboxElement.name = task.name;
-        checkboxElement.id = id;
-        checkboxElement.checked = task.done;
-        checkboxElement.addEventListener("change", () => {
-            task.done = !task.done;
-        });
-        taskElement.appendChild(labelElement);
-        taskElement.appendChild(checkboxElement);
-        tasksContainerElement.appendChild(taskElement);
-    });
-};
-const renderCategories = () => {
-    categories.forEach((category) => {
-        const categoryElement = document.createElement("li");
-        const radioInputElement = document.createElement("input");
-        radioInputElement.type = "radio";
-        radioInputElement.name = "category";
-        radioInputElement.value = category;
-        radioInputElement.id = `category-${category}`;
-        const radioLabelElement = document.createElement("label");
-        radioLabelElement.setAttribute("for", `category-${category}`);
-        radioLabelElement.textContent = category;
-        categoryElement.appendChild(radioInputElement);
-        categoryElement.appendChild(radioLabelElement);
-        categoriesContainerElement.appendChild(categoryElement);
-    });
-};
-renderCategories();
-// <li>
-//           <input
-//             type="radio"
-//             name="category"
-//             value="hobby"
-//             id="category-hobby"
-//           />
-//           <label for="category-hobby">hobby</label>
-//         </li>
 const addTask = (task) => {
     tasks.push(task);
 };
 addTaskButton.addEventListener("click", (e) => {
-    const selectionRadioElement = document.querySelector("input[type='radio']:checked");
-    const selectedCategory = selectionRadioElement.value;
     e.preventDefault();
     addTask({
         name: taskNameInputElement.value,
         done: false,
         category: selectedCategory,
     });
-    render();
+    renderTasks(tasks, tasksContainerElement);
     taskNameInputElement.value = "";
 });
-render();
+renderCategories(categories, categoriesContainerElement, selectedCategory);
+renderTasks(tasks, tasksContainerElement);
