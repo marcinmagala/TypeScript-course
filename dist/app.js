@@ -34,11 +34,13 @@
 const tasksContainerElement = document.querySelector(".tasks");
 const addTaskButton = document.querySelector("button");
 const taskNameInputElement = document.querySelector("#name");
+const categoriesContainerElement = document.querySelector(".categories");
 const categories = ["general", "work", "gym", "hobby"];
 const tasks = [
     {
         name: "Wyrzucić śmieci",
         done: false,
+        category: "hobby",
     },
     {
         name: "Pójść na siłkę",
@@ -48,6 +50,7 @@ const tasks = [
     {
         name: "Nakarmić koty",
         done: false,
+        category: "work",
     },
 ];
 const render = () => {
@@ -74,12 +77,44 @@ const render = () => {
         tasksContainerElement.appendChild(taskElement);
     });
 };
+const renderCategories = () => {
+    categories.forEach((category) => {
+        const categoryElement = document.createElement("li");
+        const radioInputElement = document.createElement("input");
+        radioInputElement.type = "radio";
+        radioInputElement.name = "category";
+        radioInputElement.value = category;
+        radioInputElement.id = `category-${category}`;
+        const radioLabelElement = document.createElement("label");
+        radioLabelElement.setAttribute("for", `category-${category}`);
+        radioLabelElement.textContent = category;
+        categoryElement.appendChild(radioInputElement);
+        categoryElement.appendChild(radioLabelElement);
+        categoriesContainerElement.appendChild(categoryElement);
+    });
+};
+renderCategories();
+// <li>
+//           <input
+//             type="radio"
+//             name="category"
+//             value="hobby"
+//             id="category-hobby"
+//           />
+//           <label for="category-hobby">hobby</label>
+//         </li>
 const addTask = (task) => {
     tasks.push(task);
 };
 addTaskButton.addEventListener("click", (e) => {
+    const selectionRadioElement = document.querySelector("input[type='radio']:checked");
+    const selectedCategory = selectionRadioElement.value;
     e.preventDefault();
-    addTask({ name: taskNameInputElement.value, done: false });
+    addTask({
+        name: taskNameInputElement.value,
+        done: false,
+        category: selectedCategory,
+    });
     render();
     taskNameInputElement.value = "";
 });
