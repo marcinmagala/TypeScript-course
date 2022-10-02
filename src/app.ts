@@ -4,6 +4,7 @@
 import renderTasks from "./helpers/render-tasks.helper.js";
 import { Category, Task } from "./types/types.js";
 import { renderCategories } from "./helpers/render-categories.helper.js";
+import { TaskClass } from "./classes/task.js";
 
 // let ageAsString: string = "dwadziescia cztery";
 // console.log(`${age}`);
@@ -68,21 +69,25 @@ const categories: Category[] = [
 ];
 
 const tasks: Task[] = [
-  {
-    name: "Wyrzucić śmieci",
-    done: false,
-    category: Category.HOBBY,
-  },
-  {
-    name: "Pójść na siłkę",
-    done: true,
-    category: Category.GYM,
-  },
-  {
-    name: "Nakarmić koty",
-    done: false,
-    category: Category.WORK,
-  },
+  new Task("Wyrzucić śmieci", false, Category.HOBBY),
+  new Task("Pójść na siłkę", true, Category.GYM),
+  new Task("Nakarmić koty", false, Category.WORK),
+
+  // {
+  //   name: "Wyrzucić śmieci",
+  //   done: false,
+  //   category: Category.HOBBY,
+  // },
+  // {
+  //   name: "Pójść na siłkę",
+  //   done: true,
+  //   category: Category.GYM,
+  // },
+  // {
+  //   name: "Nakarmić koty",
+  //   done: false,
+  //   category: Category.WORK,
+  // },
 ];
 
 const addTask = (task: Task) => {
@@ -95,11 +100,7 @@ const updateSelectedCategory = (newCategory: Category) => {
 
 addTaskButton.addEventListener("click", (e: Event) => {
   e.preventDefault();
-  addTask({
-    name: taskNameInputElement.value,
-    done: false,
-    category: selectedCategory,
-  });
+  addTask(new Task(taskNameInputElement.value, false, selectedCategory));
   renderTasks(tasks, tasksContainerElement);
   taskNameInputElement.value = "";
 });
@@ -110,3 +111,5 @@ renderCategories(
   updateSelectedCategory
 );
 renderTasks(tasks, tasksContainerElement);
+
+const taskClass = new TaskClass();
