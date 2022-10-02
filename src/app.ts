@@ -2,7 +2,7 @@
 // age = 25;
 
 import renderTasks from "./helpers/render-tasks.helper.js";
-import { Category, Task } from "./types/types";
+import { Category, Task } from "./types/types.js";
 import { renderCategories } from "./helpers/render-categories.helper.js";
 
 // let ageAsString: string = "dwadziescia cztery";
@@ -60,23 +60,28 @@ const categoriesContainerElement: HTMLElement =
 
 let selectedCategory: Category;
 
-const categories: Category[] = ["general", "work", "gym", "hobby"];
+const categories: Category[] = [
+  Category.GENERAL,
+  Category.GYM,
+  Category.HOBBY,
+  Category.WORK,
+];
 
 const tasks: Task[] = [
   {
     name: "Wyrzucić śmieci",
     done: false,
-    category: "hobby",
+    category: Category.HOBBY,
   },
   {
     name: "Pójść na siłkę",
     done: true,
-    category: "gym",
+    category: Category.GYM,
   },
   {
     name: "Nakarmić koty",
     done: false,
-    category: "work",
+    category: Category.WORK,
   },
 ];
 

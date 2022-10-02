@@ -1,6 +1,7 @@
 // let age: number = 24;
 // age = 25;
 import renderTasks from "./helpers/render-tasks.helper.js";
+import { Category } from "./types/types.js";
 import { renderCategories } from "./helpers/render-categories.helper.js";
 // let ageAsString: string = "dwadziescia cztery";
 // console.log(`${age}`);
@@ -38,22 +39,27 @@ const addTaskButton = document.querySelector("button");
 const taskNameInputElement = document.querySelector("#name");
 const categoriesContainerElement = document.querySelector(".categories");
 let selectedCategory;
-const categories = ["general", "work", "gym", "hobby"];
+const categories = [
+    Category.GENERAL,
+    Category.GYM,
+    Category.HOBBY,
+    Category.WORK,
+];
 const tasks = [
     {
         name: "Wyrzucić śmieci",
         done: false,
-        category: "hobby",
+        category: Category.HOBBY,
     },
     {
         name: "Pójść na siłkę",
         done: true,
-        category: "gym",
+        category: Category.GYM,
     },
     {
         name: "Nakarmić koty",
         done: false,
-        category: "work",
+        category: Category.WORK,
     },
 ];
 const addTask = (task) => {
